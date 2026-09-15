@@ -12,14 +12,20 @@ export function CodeBlock({ language, code }) {
   };
 
   const getHighlightedCode = () => {
-    if (language && hljs.getLanguage(language)) {
-      try {
-        return hljs.highlight(code, { language }).value;
-      } catch (e) {
-        // fallback
+    const rawCode = typeof code === 'string' ? code : String(code || '');
+    if (!rawCode) return '';
+    try {
+      if (language && hljs.getLanguage(language)) {
+        return hljs.highlight(rawCode, { language }).value;
       }
+      return hljs.highlightAuto(rawCode).value;
+    } catch (e) {
+      // Escape HTML as safe fallback
+      return rawCode
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;');
     }
-    return hljs.highlightAuto(code).value;
   };
 
   return (

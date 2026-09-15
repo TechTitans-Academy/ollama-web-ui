@@ -5,6 +5,7 @@ import remarkMath from 'remark-math';
 import rehypeKatex from 'rehype-katex';
 import { Bot, User, Copy, Check, RotateCw, Edit2, Zap } from 'lucide-react';
 import { CodeBlock } from './CodeBlock';
+import { ErrorBoundary } from './ErrorBoundary';
 
 export function MessageItem({
   message,
@@ -89,27 +90,34 @@ export function MessageItem({
           ) : (
             /* Rendered Content */
             <div className={`prose-chatgpt ${isStreaming && isLast ? 'streaming-cursor' : ''}`}>
-              <ReactMarkdown
-                remarkPlugins={[remarkGfm, remarkMath]}
-                rehypePlugins={[rehypeKatex]}
-                components={{
-                  code({ node, inline, className, children, ...props }) {
-                    const match = /language-(\w+)/.exec(className || '');
-                    return !inline && (match || children.toString().includes('\n')) ? (
-                      <CodeBlock
-                        language={match ? match[1] : ''}
-                        code={String(children).replace(/\n$/, '')}
-                      />
-                    ) : (
-                      <code className={className} {...props}>
-                        {children}
-                      </code>
-                    );
-                  }
-                }}
-              >
-                {message.content}
-              </ReactMarkdown>
+              <ErrorBoundary rawContent={message.content}>
+                <ReactMarkdown
+                  remarkPlugins={[remarkGfm, remarkMath]}
+                  rehypePlugins={[[rehypeKatex, { throwOnError: false, strict: false }]]}
+                  components={{
+                    code({ node, inline, className, children, ...props }) {
+                      const match = /language-(\w+)/.exec(className || '');
+                      const codeString = Array.isArray(children)
+                        ? children.join('')
+                        : String(children ?? '');
+                      const isBlock = match || Boolean(className) || codeString.includes('\n');
+
+                      return isBlock ? (
+                        <CodeBlock
+                          language={match ? match[1] : ''}
+                          code={codeString.replace(/\n$/, '')}
+                        />
+                      ) : (
+                        <code className={className} {...props}>
+                          {children}
+                        </code>
+                      );
+                    }
+                  }}
+                >
+                  {message.content}
+                </ReactMarkdown>
+              </ErrorBoundary>
             </div>
           )}
 
