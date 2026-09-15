@@ -2,7 +2,6 @@
 
 A modern, fast, privacy-first ChatGPT-like web interface built for running local AI models on your computer using **Ollama**.
 
-![License](https://img.shields.io/badge/license-MIT-blue.svg)
 ![React](https://img.shields.io/badge/React-19-61dafb.svg)
 ![Vite](https://img.shields.io/badge/Vite-8-646cff.svg)
 ![TailwindCSS](https://img.shields.io/badge/TailwindCSS-v4-06b6d4.svg)
@@ -160,8 +159,3 @@ Make sure you have the following installed on your machine:
 - **No Remote Servers**: Prompts are never transmitted to OpenAI, Meta, or any cloud API.
 - **Internet Usage**: Internet connection is required **only** when downloading/pulling new model weights from Ollama library.
 
----
-
-## 📜 License
-
-This project is open-source and available under the [MIT License](LICENSE).
