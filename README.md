@@ -156,6 +156,15 @@ Make sure you have the following installed on your machine:
 ## 🔒 Privacy & Network Statement
 
 - **Inference is 100% Offline**: Text generation and chat conversations happen entirely on your computer's CPU/GPU.
-- **No Remote Servers**: Prompts are never transmitted to OpenAI, Meta, or any cloud API.
+- **No Remote Servers**: Prompts are never transmitted to external cloud APIs.
 - **Internet Usage**: Internet connection is required **only** when downloading/pulling new model weights from Ollama library.
+
+---
+
+## 🎓 Educational Disclaimer
+
+This project is created strictly for **educational, experimental, and learning purposes** to help students understand client-side web development, real-time API streaming, and local LLM integration using open-source software.
+
+- **Independent Project**: This repository is an independent open-source learning project and is not affiliated with, sponsored by, or endorsed by OpenAI, Meta, or Ollama.
+- **Trademarks & Attributions**: All product names, logos, and brands mentioned herein belong to their respective trademark owners and are used purely for descriptive, educational, and identification purposes.
 
