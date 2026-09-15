@@ -1,4 +1,4 @@
-# Ask Me Anything.. — Local Ollama ChatGPT Web UI
+# Ask Me Anything.. — Local Ollama Web UI (ChatGPT-Inspired)
 
 A modern, fast, privacy-first ChatGPT-like web interface built for running local AI models on your computer using **Ollama**.
 
